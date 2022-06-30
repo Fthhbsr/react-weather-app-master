@@ -1,4 +1,3 @@
-
 /* RESET STYLES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 :root {
@@ -26,11 +25,11 @@ a {
 button {
   cursor: pointer;
 }
- 
+
 input {
   -webkit-appearance: none;
 }
- 
+
 button,
 input {
   border: none;
@@ -63,7 +62,6 @@ body {
   padding: 0 15px;
 }
 
-
 /* SECTION #1
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .top-banner {
@@ -82,6 +80,7 @@ body {
 .main form {
   position: relative;
   display: flex;
+  justify-content: center;
   align-items: center;
   color: var(--text_light);
   margin-bottom: 50px;
@@ -95,7 +94,7 @@ body {
 }
 
 .main form input::placeholder {
-  color: currentColor; 
+  color: currentColor;
 }
 
 .main form button {
@@ -140,7 +139,7 @@ body {
 }
 
 .main .city::after {
-  content: '';
+  content: "";
   width: 90%;
   height: 50px;
   position: absolute;
@@ -182,7 +181,6 @@ body {
   height: 100px;
 }
 
-
 /* FOOTER
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .page-footer {
@@ -196,7 +194,7 @@ body {
   color: var(--red);
 }
 
-#logo{
+#logo {
   width: 100px;
   height: 100px;
 }
@@ -207,7 +205,7 @@ body {
   body {
     padding: 30px;
   }
-  
+
   .main .cities {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -218,16 +216,16 @@ body {
   .main .city-temp {
     font-size: 3rem;
   }
-  
+
   .main {
     margin-top: 20px;
   }
-  
+
   .top-banner form {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .top-banner form input,
   .top-banner form button {
     width: 100%;
@@ -236,7 +234,7 @@ body {
   .top-banner form button {
     margin: 20px 0 0 0;
   }
-  
+
   .top-banner form .msg {
     position: static;
     max-width: none;
@@ -253,12 +251,11 @@ body {
   body {
     padding: 15px;
   }
-  
+
   .main .cities {
     grid-template-columns: repeat(1, 1fr);
   }
 }
-
 
 /* API Key banner
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
