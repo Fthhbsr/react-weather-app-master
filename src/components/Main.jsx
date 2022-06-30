@@ -1,11 +1,22 @@
 import axios from "axios";
 import { useState } from "react";
+import WeatherCard from "./WeatherCard";
 
 const Main = () => {
   const [searchText, setSearchText] = useState("");
+  const [data, setData] = useState([]);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setSearchText(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    getWeatherDataFromApi();
+    setSearchText("");
+    e.target.input.focus();
+    // e.target.reset();
   };
 
   const getWeatherDataFromApi = async () => {
@@ -15,24 +26,51 @@ const Main = () => {
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${searchText}&appid=${apiKey}&units=${units}&lang=${lang}`;
     try {
       const response = await axios.get(url);
-      const { main, name, sys, weather } = response.data;
-    } catch (error) {}
+      //   console.log(response);
+      const { main, name, sys, weather, id } = response.data;
+      const iconUrl = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
+
+      const isExist = data.some((card) => card.id === id);
+
+      if (isExist) {
+        setError(
+          `You already know the weather for ${name}, Please search for another city 😉`
+        );
+        setTimeout(() => {
+          setError("");
+        }, 5000);
+      } else {
+        setData([{ main, name, sys, weather, iconUrl, id }, ...data]);
+      }
+    } catch (err) {
+      console.log(err);
+      setError(err.message);
+      setTimeout(() => {
+        setError("");
+      }, 5000);
+    }
   };
+  //   console.log(data);
 
   return (
     <section className="main">
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           onChange={handleChange}
           type="text"
           placeholder="Search for a city"
+          value={searchText}
           autoFocus
         />
         <button type="submit">SUBMIT</button>
-        <span className="msg"></span>
+        <span className="msg">{error}</span>
       </form>
       <div className="container">
-        <ul className="cities">Main</ul>
+        <ul className="cities">
+          {data.map((item) => (
+            <WeatherCard key={item.id} data={item} />
+          ))}
+        </ul>
       </div>
     </section>
   );
